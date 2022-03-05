@@ -19,7 +19,6 @@ local M = {
         rename = "<Space>rn",
         code_action = "<Space>ca",
         references = "gr",
-        show_line_diagnostics = "<Space>e",
         diagnostic_goto_prev = "[d",
         diagnostic_goto_next = "]d",
         diagnostic_set_locline = "<Space>q",

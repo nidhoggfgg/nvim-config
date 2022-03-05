@@ -5,49 +5,52 @@ if fn.empty(fn.glob(install_path)) > 0 then
     if packer_bootstrap then
         require("packer").sync()
     else
-        print("can't clone packer, check your connection.")
+        error("Couldn't clone packer, please check your network:)")
     end
 end
 
 return require("packer").startup(function(use)
-
     use { "wbthomason/packer.nvim" }
 
     -- ui
-    use { "feline-nvim/feline.nvim",
-        after = "nvim-web-devicons",
-        config = function() require("plugins.configs.ui.feline.init") end,
-        requires = { "nvim-lua/lsp-status.nvim" }
+    use { "nvim-lualine/lualine.nvim",
+        requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+        config = function() require("plugins.configs.ui.lualine") end,
     }
 
     use { "akinsho/bufferline.nvim",
+        after = "nvim-web-devicons",
         config = function() require("plugins.configs.ui.bufferline") end,
-        requires = "kyazdani42/nvim-web-devicons" 
+        requires = "kyazdani42/nvim-web-devicons"
     }
 
-    use { 'lewis6991/gitsigns.nvim',
-        config = function() require("plugins.configs.ui.gitsigns") end,
+    use { "lewis6991/gitsigns.nvim",
         requires = 'nvim-lua/plenary.nvim',
         tag = 'release'
     }
 
     -- theme
     use { "folke/tokyonight.nvim",
+        after = "packer.nvim",
         config = function() vim.cmd[[colorscheme tokyonight]] end
     }
 
     -- highlight
     use { "nvim-treesitter/nvim-treesitter",
+        event = "BufRead",
         config = function() require("plugins.configs.other.treesitter") end,
         branch = "0.5-compat",
         run = ":TSUpdate"
     }
 
-    use { "p00f/nvim-ts-rainbow" }
+    use { "p00f/nvim-ts-rainbow", after = "nvim-treesitter" }
 
     -- lsp
-    use { "neovim/nvim-lspconfig",
-        config = function() require("plugins.configs.lsp.lspconfig") end
+    use { "neovim/nvim-lspconfig", config = function() require("plugins.configs.lsp.lspconfig") end }
+
+    use { "williamboman/nvim-lsp-installer",
+        after = "nvim-lspconfig",
+        config = function() require("plugins.configs.lsp.lsp-installer") end
     }
 
     use { "glepnir/lspsaga.nvim",
@@ -56,9 +59,7 @@ return require("packer").startup(function(use)
     }
 
     -- completion
-    use { "rafamadriz/friendly-snippets",
-        event = "InsertEnter"
-    }
+    use { "rafamadriz/friendly-snippets", event = "InsertEnter" }
 
     use { "hrsh7th/nvim-cmp",
         after = "friendly-snippets",
@@ -81,17 +82,24 @@ return require("packer").startup(function(use)
 
     use { "hrsh7th/cmp-path", after = "cmp-buffer" }
 
-    use { "windwp/nvim-autopairs", config = function() require("plugins.configs.completion.autopairs") end }
+    use { "windwp/nvim-autopairs",
+        after = "nvim-cmp",
+        config = function() require("plugins.configs.completion.autopairs") end
+    }
 
     -- debug
-    use { "mfussenegger/nvim-dap", config = function() require("plugins.configs.debug.dap") end }
+    use { "mfussenegger/nvim-dap",
+        config = function() require("plugins.configs.debug.dap") end
+    }
 
     use { "rcarriga/nvim-dap-ui",
         requires = { "mfussenegger/nvim-dap" },
+        after = "nvim-dap",
         config = function() require("plugins.configs.debug.dap-ui") end
     }
 
     use { "theHamsta/nvim-dap-virtual-text",
+        after = "nvim-dap",
         config = function() require("nvim-dap-virtual-text").setup() end,
         require = { "mfussenegger/nvim-dap", "nvim-treesitter/nvim-treesitter" }
     }
@@ -104,11 +112,14 @@ return require("packer").startup(function(use)
     }
 
     use { "kyazdani42/nvim-tree.lua",
+        after = "nvim-web-devicons",
         config = function() require("plugins.configs.widgets.nvimtree") end,
         requires = "kyazdani42/nvim-web-devicons"
     }
 
-    use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
+    use { 'sindrets/diffview.nvim',
+        requires = 'nvim-lua/plenary.nvim'
+    }
 
     -- other
     use { "lukas-reineke/indent-blankline.nvim",
@@ -116,7 +127,8 @@ return require("packer").startup(function(use)
         config = function() require("plugins.configs.other.indent-blankline") end
     }
 
-    use { "kyazdani42/nvim-web-devicons", 
+    use { "kyazdani42/nvim-web-devicons",
+        after = "packer.nvim",
         config = function() require("plugins.configs.other.web-devicons") end
     }
 
@@ -125,9 +137,14 @@ return require("packer").startup(function(use)
         config = function() require("plugins.configs.other.better-escape") end
     }
 
-    use { "ahmedkhalf/project.nvim", config = function() require("project_nvim").setup() end }
+    use { "ahmedkhalf/project.nvim",
+        config = function() require("project_nvim").setup() end
+    }
 
-    use { "numToStr/Comment.nvim", config = function() require('Comment').setup() end }
+    use { "numToStr/Comment.nvim",
+        event = "VimEnter",
+        config = function() require('Comment').setup() end
+    }
 
     use { "famiu/bufdelete.nvim", cmd = "Bdelete" }
 

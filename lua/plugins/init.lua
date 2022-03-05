@@ -14,7 +14,7 @@ return require("packer").startup(function(use)
 
     -- ui
     use { "nvim-lualine/lualine.nvim",
-        requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+        requires = { "kyazdani42/nvim-web-devicons", opt = true },
         config = function() require("plugins.configs.ui.lualine") end,
     }
 
@@ -25,8 +25,9 @@ return require("packer").startup(function(use)
     }
 
     use { "lewis6991/gitsigns.nvim",
-        requires = 'nvim-lua/plenary.nvim',
-        tag = 'release'
+        requires = "nvim-lua/plenary.nvim",
+        tag = "release",
+        config = function() require("gitsigns").setup() end
     }
 
     -- theme
@@ -117,8 +118,8 @@ return require("packer").startup(function(use)
         requires = "kyazdani42/nvim-web-devicons"
     }
 
-    use { 'sindrets/diffview.nvim',
-        requires = 'nvim-lua/plenary.nvim'
+    use { "sindrets/diffview.nvim",
+        requires = "nvim-lua/plenary.nvim"
     }
 
     -- other
@@ -143,7 +144,7 @@ return require("packer").startup(function(use)
 
     use { "numToStr/Comment.nvim",
         event = "VimEnter",
-        config = function() require('Comment').setup() end
+        config = function() require("Comment").setup() end
     }
 
     use { "famiu/bufdelete.nvim", cmd = "Bdelete" }

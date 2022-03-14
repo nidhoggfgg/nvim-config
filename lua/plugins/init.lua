@@ -49,10 +49,10 @@ return require("packer").startup(function(use)
     -- lsp
     use { "neovim/nvim-lspconfig", config = function() require("plugins.configs.lsp.lspconfig") end }
 
-    use { "williamboman/nvim-lsp-installer",
-        after = "nvim-lspconfig",
-        config = function() require("plugins.configs.lsp.lsp-installer") end
-    }
+    -- use { "williamboman/nvim-lsp-installer",
+    --     after = "nvim-lspconfig",
+    --     config = function() require("plugins.configs.lsp.lsp-installer") end
+    -- }
 
     use { "glepnir/lspsaga.nvim",
         after = "nvim-lspconfig",

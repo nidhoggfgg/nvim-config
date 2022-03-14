@@ -4,7 +4,7 @@ if not present then
 end
 
 vim.opt.list = true
-vim.opt.listchars:append("eol:↴")
+-- vim.opt.listchars:append("eol:↴")
 
 blankline.setup {
     show_end_of_line = true

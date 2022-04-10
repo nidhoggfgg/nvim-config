@@ -70,17 +70,15 @@ cmp.setup {
             select = true,
         },
         ["<Tab>"] = cmp.mapping(function(fallback)
+            local next_char = string.sub(vim.fn.getline("."), vim.fn.col("."), vim.fn.col("."))
             if cmp.visible() then
                 cmp.select_next_item()
+            elseif next_char == ')' or next_char == ']' or next_char == '"' or next_char == '\'' or next_char == '}' or next_char == '>' then
+                vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Right>", true, true, true), "")
             elseif require("luasnip").expand_or_jumpable() then
                 vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
             else
-                local next_char = string.sub(vim.fn.getline("."), vim.fn.col("."), vim.fn.col("."))
-                if next_char == ')' or next_char == ']' or next_char == '"' or next_char == '\'' or next_char == '}' then
-                    vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Right>", true, true, true), "")
-                else
-                    fallback()
-                end
+                fallback()
             end
         end, {"i", "s"}), 
         ["<S-Tab>"] = cmp.mapping(function(fallback)

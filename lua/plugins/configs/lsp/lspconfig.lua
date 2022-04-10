@@ -52,7 +52,7 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
    },
 }
 
-local servers = { "clangd", "rust_analyzer" }
+local servers = { "clangd", "rust_analyzer", "pyright" }
 for _, lsp in pairs(servers) do
     lspconfig[lsp].setup {
         on_attach = on_attach,

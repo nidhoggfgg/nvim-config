@@ -149,5 +149,7 @@ return require("packer").startup(function(use)
 
     use { "famiu/bufdelete.nvim", cmd = "Bdelete" }
 
+    use { "wakatime/vim-wakatime" }
+
 end)
 

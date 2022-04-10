@@ -56,10 +56,10 @@ nvimtree.setup {
             error = "",
         }
     },
+    auto_reload_on_write = true,
     disable_netrw = true,
     hijack_netrw = true,
     ignore_ft_on_setup = { "dashboard" },
-    auto_close = true,
     open_on_tab = false,
     hijack_cursor = true,
     update_cwd = true,

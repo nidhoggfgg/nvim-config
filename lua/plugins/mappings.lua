@@ -1,9 +1,9 @@
 local M = {
     -- ui
     bufferline = {
-        buffer_next = "<Tab>",
-        buffer_prev = "<S-Tab>",
-        buffer_delete = "<leader>x"
+        buffer_next = "<A-l>",
+        buffer_prev = "<A-h>",
+        buffer_delete = "<A-x>"
     },
 
     lspconfig = {
@@ -54,9 +54,9 @@ local M = {
         remove = "d",
         rename = "r",
         cut = "x",
-        copy = "c",
+        copy = "y",
         paste = "p",
-        copy_name = "y",
+        copy_name = "c",
         copy_path = "Y"
     },
 

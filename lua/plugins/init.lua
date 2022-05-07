@@ -59,6 +59,15 @@ return require("packer").startup(function(use)
         config = function() require("plugins.configs.lsp.lspsaga") end
     }
 
+    -- use { "ms-jpq/coq.artifacts",
+    --     branch = "artifacts",
+    -- }
+    --
+    -- use { "ms-jpq/coq_nvim",
+    --     branch = "coq",
+    --     config = function() require("plugins.configs.completion.coq") end
+    -- }
+
     -- completion
     use { "rafamadriz/friendly-snippets", event = "InsertEnter" }
 
@@ -84,8 +93,8 @@ return require("packer").startup(function(use)
     use { "hrsh7th/cmp-path", after = "cmp-buffer" }
 
     use { "windwp/nvim-autopairs",
-        after = "nvim-cmp",
-        config = function() require("plugins.configs.completion.autopairs") end
+       after = "nvim-cmp",
+       config = function() require("plugins.configs.completion.autopairs") end
     }
 
     -- debug

@@ -12,3 +12,10 @@ map("n", "<C-j>", "<C-w>j", opts)
 map("n", "<C-k>", "<C-w>k", opts)
 map("n", "<C-l>", "<C-w>l", opts)
 
+-- same as vscode
+map("n", "<C-s>", ":w<CR>", opts)
+map("n", "H", "^", opts)
+map("n", "L", "$", opts)
+
+-- the c-n is used for tree
+map("n", "<A-n>", ":nohl<CR>", opts)
